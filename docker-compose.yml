@@ -1,0 +1,12 @@
+version: "3.1"
+
+services:
+  cdn-srv:
+    build: .
+    container_name: "cdn-srv"
+    restart: "always"
+    ports:
+      - "3000":"3000"
+    environment:
+      "PORT": "3000",
+      "MONGO_URI": "mongodb://root:123456@localhost:27017/pjcore"
