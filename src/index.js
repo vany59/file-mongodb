@@ -11,8 +11,8 @@ app.use(require("helmet")({ contentSecurityPolicy: false }));
 app.use(express.json({ limit: "500kb" }));
 app.use(express.urlencoded({ extended: false }));
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log("server listenning");
+app.listen(process.env.PORT, () => {
+  console.log(`server listenning on port: ${process.env.PORT}`);
 });
 
 app.use("/api", require("./app/route"));

@@ -3,7 +3,7 @@ const { v4: uuid } = require("uuid");
 const mongoose = require("mongoose");
 const multer = require("multer");
 const path = require("path");
-const bucketName = "srv-cdn";
+const bucketName = "file";
 let error = false;
 
 class Mongo {
@@ -21,10 +21,8 @@ class Mongo {
       })
       .catch(() => {});
 
-    mongoose.connection.on("connected", () => {
-      this.bucket = new GridFSBucket(mongoose.connection.db, {
-        readPreference: "secondaryPreferred",
-      });
+    mongoose.connection.on("connected", (client) => {
+      this.bucket = new GridFSBucket(mongoose.connection.db);
       console.log("Database connected", process.env.MONGO_URI);
       error = false;
     });
